@@ -5,7 +5,7 @@ int main(void)
 {
 	int i, n;
 	unsigned long counter = 0;	//³ª´°¼À È½¼ö
-	for(n = 2; n <= 10000; n++) {
+	for(n = 2; n <= 1000; n++) {
 		for(i = 2; i < n; i++) {
 			counter++;
 			if(n % i == 0)		//³ª´©¾î¶³¾îÁö¸é ¼Ò¼ö°¡ ¾Æ´Õ´Ï´Ù.
