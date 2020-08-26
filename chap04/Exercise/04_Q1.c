@@ -6,7 +6,7 @@ int main(void)
 	IntStack s;
 
 	if(Initialize(&s, 64) == -1) {
-		puts("스택 생서에 실패하였습니다.");
+		puts("스택 생성에 실패하였습니다.");
 		return 1;
 	}
 
