@@ -39,7 +39,7 @@ int main(void)
 			if(Peek(&s, &x) == -1)
 				puts("\a오류 : 피크에 실패했습니다.");
 			else
-				printf("피크한 데이터는 %d입니다.\n");
+				printf("피크한 데이터는 %d입니다.\n", x);
 			break;
 
 		case 4:
