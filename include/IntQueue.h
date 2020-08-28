@@ -41,6 +41,9 @@ int IsFull(const IntQueue *q);
 //--- 큐에서 검색 ---
 int Search(const IntQueue *q, int x);
 
+//--- 큐에서 검색(프론트 기준 인덱스 반환) ---
+int Search2(const IntQueue *q, int x);
+
 //--- 모든 데이터 출력 ---
 void Print(const IntQueue *q);
 

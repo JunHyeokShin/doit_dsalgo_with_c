@@ -93,6 +93,18 @@ int Search(const IntQueue *q, int x)
 	return -1;				//검색 실패
 }
 
+//--- 큐에서 검색(프론트 기준 인덱스 반환) ---
+int Search2(const IntQueue *q, int x)
+{
+	int i;
+
+	for(i = 0; i < q->num; i++) {
+		if(q->que[(i + q->front) % q->max] == x)
+			return i;
+	}
+	return -1;
+}
+
 //--- 모든 데이터 출력 ---
 void Print(const IntQueue *q)
 {
