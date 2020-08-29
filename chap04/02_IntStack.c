@@ -29,7 +29,7 @@ int Pop(IntStack *s, int *x)
 {
 	if(s->ptr <= 0)		//스택이 비어 있음
 		return -1;
-	*x = s->stk[s->ptr--];
+	*x = s->stk[--s->ptr];
 	return 0;
 }
 
