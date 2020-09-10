@@ -19,7 +19,7 @@ void quick(int a[], int left, int right)
 		}
 	} while(pl <= pr);
 
-	if(pr - left < right - pl) {
+	if(right - pl < pr - left) {
 		if(pl < right) quick(a, pl, right);
 		if(left < pr) quick(a, left, pr);
 	} else {
