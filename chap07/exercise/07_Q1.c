@@ -1,5 +1,3 @@
-//int형 집합 IntSet(소스)
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "IntSet.h"
@@ -24,6 +22,12 @@ int IsMember(const IntSet *s, int n)
 		if(s->set[i] == n)
 			return i;	//들어 있음(인덱스를 반환)
 	return -1;			//들어 있지 않음
+}
+
+//--- 집합이 가득 찼는지 확인 ---
+int IsFull(const IntSet *s)
+{
+	return s->num >= s->max;
 }
 
 //--- 집합 s에 n을 추가 ---
@@ -117,6 +121,74 @@ IntSet *Difference(IntSet *s1, const IntSet *s2, const IntSet *s3)
 	return s1;
 }
 
+//--- 집합 s2, s3의 대칭 차를 s1에 대입 ---
+IntSet *SymmetricDifference(IntSet *s1, const IntSet *s2, const IntSet *s3)
+{
+	int i;
+	s1->num = 0;
+	for(i = 0; i < s2->num; i++)
+		if(IsMember(s3, s2->set[i]) == -1)
+			Add(s1, s2->set[i]);
+	for(i = 0; i < s3->num; i++)
+		if(IsMember(s2, s3->set[i]) == -1)
+			Add(s1, s3->set[i]);
+	return s1;
+}
+
+//--- 집합 s1에 s2의 모든 원소를 추가 ---
+IntSet *ToUnion(IntSet *s1, const IntSet *s2)
+{
+	int i;
+	for(i = 0; i < s2->num; i++)
+		Add(s1, s2->set[i]);
+	return s1;
+}
+
+//--- 집합 s1에서 s2에 들어 있지 않은 모든 원소를 삭제 ---
+IntSet *ToIntersection(IntSet *s1, const IntSet *s2)
+{
+	int i = 0;
+	while(i < s1->num) {
+		if(IsMember(s2, s1->set[i]) == -1)
+			Remove(s1, s1->set[i]);
+		else
+			i++;
+	}
+	return s1;
+}
+
+//--- 집합 s1에서 s2에 들어 있는 모든 원소를 삭제 ---
+IntSet *ToDifference(IntSet *s1, const IntSet *s2)
+{
+	int i;
+	for(i = 0; i < s2->num; i++)
+		Remove(s1, s2->set[i]);
+	return s1;
+}
+
+//--- 집합 s1이 s2의 부분집합인지 확인 ---
+int IsSubset(const IntSet *s1, const IntSet *s2)
+{
+	int i, j;
+	for(i = 0; i < s1->num; i++) {
+		for(j = 0; j < s2->num; j++)
+			if(s1->set[i] == s2->set[j])
+				break;
+		if(j == s2->num)
+			return 0;
+	}
+	return -1;
+}
+
+//--- 집합 s1이 s2의 진부분집합인지 확인 ---
+int IsProperSubset(const IntSet *s1, const IntSet *s2)
+{
+	int i;
+	if(s1->num >= s2->num)
+		return 0;
+	return IsSubset(s1, s2);
+}
+
 //--- 집합 s의 모든 원소를 출력 ---
 void Print(const IntSet *s)
 {
@@ -133,6 +205,12 @@ void PrintLn(const IntSet *s)
 {
 	Print(s);
 	putchar('\n');
+}
+
+//--- 집합의 모든 원소를 삭제 ---
+void Clear(IntSet *s)
+{
+	s->num = 0;
 }
 
 //--- 집합 종료 ---
